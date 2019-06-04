@@ -1,0 +1,38 @@
+app-line-chart {
+  #lineChart {
+    height: inherit;
+    width: inherit;
+    min-width: 500px;
+    min-height: 400px;
+    
+    svg {
+      font-family: Sans-Serif, Arial;
+    }
+    .line {
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .axis path {
+      stroke: black;
+    }
+
+    .text {
+      font-size: 12px;
+    }
+
+    .title-text {
+      font-size: 12px;
+    }
+
+    .legend {
+      font-weight: 700;
+      cursor: pointer;
+      padding: 3px 0;
+    }
+
+    .legend.hidden {
+      opacity: 0.4;
+    }
+  }
+}
