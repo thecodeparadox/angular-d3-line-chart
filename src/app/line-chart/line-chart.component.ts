@@ -4,12 +4,10 @@ import {
   Input,
   OnChanges,
   ViewChild,
-  ViewEncapsulation,
-  HostListener
+  ViewEncapsulation
 } from '@angular/core';
 import * as d3 from 'd3';
 import { DataModel } from 'src/app/line-chart/data.model';
-import { schemeDark2 } from 'd3';
 
 @Component({
   selector: 'app-line-chart',
@@ -131,8 +129,15 @@ export class LineChartComponent implements OnChanges {
       .attr('id', name => {
         return `legend-${name.toString().toLowerCase()}`;
       })
-      .on('click', function(name, index, groups) {
+      .on('click', function(name, index) {
         const is_exists = SELF.offTheChart.indexOf(name);
+
+        // If only one line showing in chart, then do not
+        // make it off, cause graph need some data to render
+        if (SELF.offTheChart.length === 1 && is_exists > -1) {
+          return false;
+        }
+        
         if (is_exists > -1) {
           SELF.offTheChart.splice(is_exists, 1);
         } else {
@@ -191,7 +196,6 @@ export class LineChartComponent implements OnChanges {
       .attr('d', d => line(d.values as any))
       .style('stroke', (d, i) => lineColors[i])
       .style('opacity', lineOpacity);
-
 
     /* Add circles in the line */
     lines
